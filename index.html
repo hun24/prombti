@@ -391,7 +391,7 @@
                 c: { text: "칭찬을 많이 해주면서 핵심적인 수정사항 한두 개만 살짝 전달한다.", score: { T: 1, F: 1 } }
             },
             {
-                q: "친구와 대화 중 의견 대립이 생겼을 때 내가 더 중요하게 보는 것은?",
+                q: "친구와 대화 중 의견 대립이 생겼을 때 내가 더 중요하게보는 것은?",
                 a: { text: "누구의 말이 더 논리적으로 옳고 사리에 맞는지 Fact 기준", score: { T: 2 } },
                 b: { text: "서로 감정이 상하지 않고 관계가 원만하게 유지되는지 Heart 기준", score: { F: 2 } },
                 c: { text: "논리도 중요하지만 친구의 기분을 배려하며 타협점을 찾는 편", score: { T: 1, F: 1 } }
@@ -432,11 +432,21 @@
         let userAnswers = [];
         let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
 
-        // ESC 키 모달 닫기
+        // 비밀키(Q 키) 트리거 - 단축키로 빠른 접속 QR 모달 열기
         window.addEventListener('keydown', (e) => {
+            // ESC 키: 모든 모달 닫기
             if (e.key === 'Escape') {
                 closeAllMbtiModal();
                 closeCompatibilityModal();
+                closeSecretQrModal();
+            }
+
+            // secret-qr-modal 트리거: 'q' 또는 'Q' 키 (한글 입력 'ㅂ' 포함)
+            const activeEl = document.activeElement;
+            const isInput = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.tagName === 'SELECT');
+            
+            if (!isInput && (e.key === 'q' || e.key === 'Q' || e.key === 'ㅂ')) {
+                openSecretQrModal();
             }
         });
 
@@ -559,6 +569,7 @@
             document.getElementById('loading-screen').classList.add('hidden');
             document.getElementById('all-mbti-modal').classList.add('hidden');
             document.getElementById('compatibility-modal').classList.add('hidden');
+            document.getElementById('secret-qr-modal').classList.add('hidden');
 
             document.getElementById('result-screen').classList.remove('hidden');
 
@@ -625,6 +636,23 @@
             document.getElementById('result-project').innerText = data.project;
             document.getElementById('result-match-best').innerText = data.best;
             document.getElementById('result-match-worst').innerText = data.worst;
+        }
+
+        // 현장 스마트폰 접속 QR 모달 관련 함수
+        function openSecretQrModal() {
+            const baseUrl = `${window.location.origin}${window.location.pathname}`;
+            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(baseUrl)}`;
+            
+            const secretQrImg = document.getElementById('booth-secret-qr-img');
+            const secretUrlTxt = document.getElementById('booth-secret-url-text');
+            if (secretQrImg) secretQrImg.src = qrApiUrl;
+            if (secretUrlTxt) secretUrlTxt.innerText = baseUrl;
+
+            document.getElementById('secret-qr-modal').classList.remove('hidden');
+        }
+
+        function closeSecretQrModal() {
+            document.getElementById('secret-qr-modal').classList.add('hidden');
         }
 
         function openAllMbtiModal() {
@@ -1146,6 +1174,34 @@
             </div>
         </div>
     </main>
+
+    <!-- [학생 안내용 QR 모달 ('Q' 키로 활성화)] -->
+    <div id="secret-qr-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="secret-qr-title">
+        <div class="bg-slate-900 rounded-3xl border-2 border-indigo-500/50 w-full max-w-sm p-6 text-center space-y-5 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+            <button onclick="closeSecretQrModal()" aria-label="모달 닫기" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors focus:outline-none">
+                <i class="fa-solid fa-xmark text-sm" aria-hidden="true"></i>
+            </button>
+            <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center mx-auto text-xl font-bold">
+                <i class="fa-solid fa-qrcode" aria-hidden="true"></i>
+            </div>
+            <div class="space-y-1">
+                <span class="px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-extrabold text-[10px] uppercase border border-indigo-500/40">
+                    📱 모바일 접속 QR
+                </span>
+                <h3 id="secret-qr-title" class="text-xl font-extrabold text-white">스마트폰으로 테스트 시작하기</h3>
+                <p class="text-xs text-slate-400">카메라 앱으로 아래 QR 코드를 스캔하면 내 폰에서 바로 테스트를 진행할 수 있습니다!</p>
+            </div>
+            <div class="flex justify-center py-2">
+                <img id="booth-secret-qr-img" src="" alt="현장 스마트폰 접속용 QR 코드" class="w-56 h-56 rounded-2xl border-4 border-indigo-500/40 bg-white p-2.5 shadow-xl">
+            </div>
+            <div class="bg-slate-800/80 rounded-xl p-3 border border-slate-700">
+                <p class="text-[10px] text-slate-400 font-mono break-all" id="booth-secret-url-text">https://...</p>
+            </div>
+            <button onclick="closeSecretQrModal()" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs transition-colors shadow-lg shadow-indigo-600/20">
+                닫기 (ESC)
+            </button>
+        </div>
+    </div>
 
     <!-- 전체 MBTI 모달 -->
     <div id="all-mbti-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="all-mbti-title">

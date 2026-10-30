@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고등학생 프로그래밍 언어 MBTI 테스트</title>
+    
+    <!-- Open Graph & SNS 공유 메타 태그 -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="고등학생 프로그래밍 언어 MBTI 테스트">
+    <meta property="og:description" content="쉬는 시간, 수행평가, 친구 대화 질문으로 나와 딱 맞는 프로그래밍 언어를 찾아보세요!">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="고등학생 프로그래밍 언어 MBTI 테스트">
+    <meta name="twitter:description" content="나와 딱 맞는 개발자 프로그래밍 언어는 무엇일까?">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        };
+    </script>
+
+    <script>
+        const mbti16Database = {
+            "INTJ": {
+                lang: "Rust",
+                emoji: "🦀",
+                tag: "완벽주의 전략가",
+                title: "완벽주의 원칙주의자 시스템 구축가",
+                quote: "\"완벽하게 세워진 질서 안에서는 어떤 예외도 흔들릴 수 없다.\"",
+                summary: "깐깐하지만 한번 신뢰를 주면 절대 배신하지 않는 완벽주의자!",
+                description: "당신은 완벽한 안전성과 성능을 추구하는 Rust와 닮았습니다. 타협 없는 논리 구조를 선호하며, 초반 설계나 규칙 학습에 공을 들여 나중에 발생할 문제나 실수를 사전 차단합니다.",
+                traits: [
+                    "원리 원칙과 정밀한 시스템 구축 선호",
+                    "수행평가 시 사전 구조 설계와 오답 방지에 집중",
+                    "약속된 규격과 논리를 절대적으로 준수"
+                ],
+                project: "철저한 오류 검증 기반의 전교생 시간표 & 마일리지 관리 시스템",
+                best: "ENFP - Python",
+                worst: "ENTP - JavaScript"
+            },
+            "INTP": {
+                lang: "Haskell",
+                emoji: "λ",
+                tag: "순수 논리 탐구자",
+                title: "순수 논리와 추상화의 깊은 탐구자",
+                quote: "\"부작용 없는 깨끗한 논리만이 진정한 평화를 가져온다.\"",
+                summary: "세상의 근본 원리와 깊은 이론을 탐구하는 지적 철학자!",
+                description: "당신은 부작용을 극도로 경계하고 순수한 논리적 결합을 추구하는 Haskell을 닮았습니다. 실용적인 겉치레보다는 아름다운 논리 구조와 본질적인 질문에 깊이 매료됩니다.",
+                traits: [
+                    "남들이 지나치는 본질적인 원리에 질문을 던짐",
+                    "혼자만의 고요한 생각 공간에서 깊은 아이디어 정제",
+                    "지적 호기심을 자극하는 복잡한 수리/학술 문제 탐구"
+                ],
+                project: "수학적 알고리즘 기반의 동아리 대진표 최적화 엔진",
+                best: "ENTJ - TypeScript",
+                worst: "ESFJ - PHP"
+            },
+            "ENTJ": {
+                lang: "TypeScript",
+                emoji: "📘",
+                tag: "체계적 리더",
+                title: "무질서에 질서를 부여하는 리더",
+                quote: "\"규칙과 체계가 명확할 때 최고의 결과물이 탄생한다.\"",
+                summary: "복잡한 혼돈 속에서도 견고한 체계와 역할을 부여하는 조별 과제 리더!",
+                description: "당신은 유연한 언어 환경에 강력한 타입 시스템을 더해 대규모 시스템을 통제하는 TypeScript를 닮았습니다. 명확한 규칙과 효율성으로 그룹 전체의 목표를 끌어올립니다.",
+                traits: [
+                    "조별 과제 시 역할 분담과 기한 관리를 칼같이 지휘",
+                    "체계적인 가이드라인을 작성하여 팀원 오차 최소화",
+                    "목표 달성을 위한 비전 제시 및 결단력 발휘"
+                ],
+                project: "전교생 축제 부스 예약 및 통합 운영 매니지먼트 플랫폼",
+                best: "INTP - Haskell",
+                worst: "ESFP - HTML/CSS"
+            },
+            "ENTP": {
+                lang: "JavaScript",
+                emoji: "⚡",
+                tag: "창의적 트릭스터",
+                title: "어디서나 존재하며 한계를 부수는 혁신가",
+                quote: "\"규칙이 없다고? 그럼 내가 지금 새 규칙을 만들면 되지!\"",
+                summary: "어디서나 자유롭고 예측 불가능한 상상력으로 활력을 넣는 창의파!",
+                description: "당신은 웹, 서버, 앱 어디서나 자유롭게 활용되는 JavaScript와 닮았습니다. 고정관념을 깨는 번뜩이는 아이디어와 임기응변으로 문제를 다채롭게 해결합니다.",
+                traits: [
+                    "토론 수업이나 수행평가에서 생각지 못한 아이디어 제안",
+                    "틀에 갇히지 않은 자유롭고 스피디한 시도",
+                    "다양한 분야를 넘나드는 왕성한 호기심"
+                ],
+                project: "실시간 대화형 학생회 아이디어 챗봇 웹 앱",
+                best: "ISTJ - C / C++",
+                worst: "INTJ - Rust"
+            },
+            "INFJ": {
+                lang: "Go (Golang)",
+                emoji: "🐹",
+                tag: "조용한 통찰가",
+                title: "단순함 속에 깊은 철학을 품은 동시성 마스터",
+                quote: "\"복잡함은 미덕이 아니다. 진짜 위대함은 단순함에 있다.\"",
+                summary: "차분함 속에 깊은 통찰력과 효율을 품은 조용한 해결사!",
+                description: "당신은 군더더기를 배제하고 직관적이면서도 강력한 동시성을 자랑하는 Go 언어를 닮았습니다. 내면의 곧은 철학을 가지고 친구들을 조용히 뒷받침합니다.",
+                traits: [
+                    "화려한 겉치레보다 실속 있고 가벼운 구조 선호",
+                    "타인의 고민을 진심으로 경청하고 통찰력 있는 조언 제공",
+                    "조용하지만 꾸준하게 전체의 안정성 유지"
+                ],
+                project: "익명 학생 고민 상담 및 마음 케어 알림 서비스",
+                best: "ENFJ - Kotlin",
+                worst: "ISTP - SQL"
+            },
+            "INFP": {
+                lang: "Ruby",
+                emoji: "💎",
+                tag: "감성 낭만주의자",
+                title: "자유와 아름다움을 꿈꾸는 감성 시인",
+                quote: "\"작성하는 즐거움과 따뜻한 감성이 가장 소중하다.\"",
+                summary: "인간 중심의 따뜻함과 아름다운 표현을 가치 있게 여기는 낭만파!",
+                description: "당신은 작성자의 행복을 최우선으로 생각하는 우아한 언어 Ruby를 닮았습니다. 단순 효율보다는 사람의 마음을 움직이는 감성과 독창적인 시각을 중시합니다.",
+                traits: [
+                    "글짓기, 미술, 감성 창작물 활동에서 진가 발휘",
+                    "상대방의 마음과 기분을 세심하게 살피는 공감 능력",
+                    "자신만의 독특한 가치관과 색깔을 존중"
+                ],
+                project: "고교 문학 동아리 감성 시집 웹 갤러리",
+                best: "INTJ - Rust",
+                worst: "ESTJ - C#"
+            },
+            "ENFJ": {
+                lang: "Kotlin",
+                emoji: "🎯",
+                tag: "조화로운 리더",
+                title: "과거와 미래를 잇는 따뜻한 혁신가",
+                quote: "\"모두가 편안하고 행복하게 더 나은 결과를 만들 수 있습니다.\"",
+                summary: "타인을 배려하며 조화로운 협업 환경을 만들어내는 따뜻한 리더!",
+                description: "당신은 기존 시스템과의 호환성을 품으면서도 현대적인 편의를 제공하는 Kotlin을 닮았습니다. 모두가 소외되지 않고 즐겁게 목표에 도달하도록 이끕니다.",
+                traits: [
+                    "동아리나 반 친구들의 의견을 살뜰히 챙기고 다독임",
+                    "과거의 전통을 존중하면서도 더 스마트한 대안 제시",
+                    "매끄럽고 안전한 소통 환경 조성"
+                ],
+                project: "학급 모둠 과제 공유 및 따뜻한 피드백 커뮤니티",
+                best: "INFJ - Go (Golang)",
+                worst: "ISTP - SQL"
+            },
+            "ENFP": {
+                lang: "Python",
+                emoji: "🐍",
+                tag: "열정의 창의가",
+                title: "상상하는 모든 것을 현실로 만드는 열정의 아이콘",
+                quote: "\"인생은 짧습니다. 고민하지 말고 지금 당장 시작해 보세요!\"",
+                summary: "친근한 접근성과 무궁무진한 호기심으로 아이디어를 펼치는 열정파!",
+                description: "당신은 누구나 배우기 쉽고 인공지능부터 웹까지 못 하는 게 없는 Python을 닮았습니다. 새로운 흥미거리가 생기면 망설임 없이 도전하는 분위기 메이커입니다.",
+                traits: [
+                    "다양한 분야에 호기심이 많아 하고 싶은 게 넘침",
+                    "친근하고 밝은 에너지로 친구들에게 쉽게 다가감",
+                    "아이디어를 떠올리면 바로 실행해보는 순발력"
+                ],
+                project: "AI 기반 내 성격 맞춤 학교 급식 & 맛집 추천기",
+                best: "INTJ - Rust",
+                worst: "ISFJ - Java"
+            },
+            "ISTJ": {
+                lang: "C / C++",
+                emoji: "⚙️",
+                tag: "흔들림 없는 파수꾼",
+                title: "타협 없는 단단함을 지닌 시스템의 주춧돌",
+                quote: "\"기본에 충실하라. 속임수 없는 근본이 세상을 받친다.\"",
+                summary: "수십 년간 변함없이 세상을 뒷받침해 온 굳건하고 믿음직한 근본!",
+                description: "당신은 하드웨어 근본을 다루는 C/C++을 닮았습니다. 맡은 바 책임을 묵묵히 완수하며, 과장이나 포장 없이 입증된 실력과 원칙으로 신뢰를 쌓습니다.",
+                traits: [
+                    "수업 시간 노트 정리와 기출 분석을 누구보다 철저히 수행",
+                    "약속 시간과 제출 마감 기한을 엄격히 준수",
+                    "솔직하고 묵묵한 성품으로 주위의 탄탄한 신뢰 확보"
+                ],
+                project: "학교 종소리 & 방송 장비 제어 자동화 가젯",
+                best: "ENTP - JavaScript",
+                worst: "INFP - Ruby"
+            },
+            "ISFJ": {
+                lang: "Java",
+                emoji: "☕",
+                tag: "든든한 수호자",
+                title: "묵묵히 세상을 받치는 든든한 파수꾼",
+                quote: "\"한 번 정해진 의무는 어디서든 변함없이 세상을 지킵니다.\"",
+                summary: "어떤 환경에서도 변함없이 성실하게 제 자리를 지키는 수호자!",
+                description: "당신은 수많은 대규모 시스템의 든든한 표준인 Java를 닮았습니다. 신중하고 세심하여 주변 사람들을 챙기고, 꾸준함으로 완성도 높은 결과를 이끌어냅니다.",
+                traits: [
+                    "친구들의 작은 요청이나 챙김도 소홀히 하지 않음",
+                    "안정적이고 검증된 방식을 선호하여 실수를 예방",
+                    "주어진 책무를 성실히 끝까지 완수"
+                ],
+                project: "학급 도서 대여 및 자습실 좌석 관리 시스템",
+                best: "ESTP - Dart / Flutter",
+                worst: "ENFP - Python"
+            },
+            "ESTJ": {
+                lang: "C#",
+                emoji: "🔷",
+                tag: "유능한 관리자",
+                title: "엄격한 규격과 조직력을 갖춘 비즈니스 마스터",
+                quote: "\"체계적인 도구와 명확한 표준이 승리를 보장한다.\"",
+                summary: "강력한 리더십과 탄탄한 조직력으로 최고 효율을 도출하는 능력자!",
+                description: "당신은 체계적인 프레임워크와 닷넷 생태계를 자랑하는 C#을 닮았습니다. 명확한 가이드라인을 바탕으로 효율적인 진행 상황 관리에 탁월합니다.",
+                traits: [
+                    "학급 반장이나 동아리 부장 역할을 훌륭히 수행",
+                    "목표 설정, 계획 수립, 역할 분배의 명확성",
+                    "공정하고 객관적인 기준으로 성과 관리"
+                ],
+                project: "전교 학생회 공약 이행률 & 예산 결산 대시보드",
+                best: "ESFP - HTML / CSS",
+                worst: "INFP - Ruby"
+            },
+            "ESFJ": {
+                lang: "PHP",
+                emoji: "🐘",
+                tag: "친근한 봉사자",
+                title: "누구나 품어주는 친근한 웹의 조력자",
+                quote: "\"복잡한 이론보다는 당장 사람들에게 도움이 되는 것이 중요하죠.\"",
+                summary: "어디서나 친근하게 도움을 주며 실질적인 활력을 제공하는 친화력 장인!",
+                description: "당신은 전 세계 웹을 친근하게 구성해온 PHP를 닮았습니다. 사람들과의 관계를 중요시하며, 누구에게나 쉽게 실질적인 도움을 주는 따뜻한 보조자입니다.",
+                traits: [
+                    "친구들의 생일, 기념일, 경조사를 살뜰히 챙김",
+                    "어려운 상황에 처한 친구에게 먼저 손을 내묨",
+                    "실생활에 바로 적용되는 실용적 해결책 제시"
+                ],
+                project: "우리 반 친구들 생일 알림 및 매점 인기 메뉴 투표함",
+                best: "ISFP - Swift",
+                worst: "INTP - Haskell"
+            },
+            "ISTP": {
+                lang: "SQL",
+                emoji: "🗄️",
+                tag: "날카로운 해결사",
+                title: "핵심만 정확하게 타격하는 데이터 해결사",
+                quote: "\"질문은 정확하게, 결과는 명확하게. 군더더기는 사절이다.\"",
+                summary: "복잡한 문제 속에서 핵심만 정확하게 단칼에 추출해내는 만능 해결사!",
+                description: "당신은 거대한 데이터베이스 속에서 필요한 정보만 정확히 조회하는 SQL을 닮았습니다. 불필요한 사족은 배제하고 문제의 핵심을 파고듭니다.",
+                traits: [
+                    "말보다 행동으로 직관적인 문제 해결 선호",
+                    "실용적이지 않은 복잡한 절차나 형식을 싫어함",
+                    "위기 상황에서 침착하고 날카로운 판단력 발휘"
+                ],
+                project: "학교 기출문제 오답 패턴 분석 및 고난도 검색기",
+                best: "ESFJ - PHP",
+                worst: "ENFJ - Kotlin"
+            },
+            "ISFP": {
+                lang: "Swift",
+                emoji: "🍎",
+                tag: "감각적 예술가",
+                title: "세련된 감각으로 아름다움을 그리는 예술가",
+                quote: "\"눈으로 보이는 아름다움과 손끝으로 느끼는 감성이 전부입니다.\"",
+                summary: "우아한 디자인과 미적 디테일을 세심하게 다듬는 디테일 제작자!",
+                description: "당신은 매끄럽고 아름다운 애플 UX/UI를 만들어내는 Swift를 닮았습니다. 감각적이고 미적인 가치를 중요시하며 부드러운 사용성을 추구합니다.",
+                traits: [
+                    "PPT 디자인, 카드뉴스 제작, 서식 꾸미기에서 감각 발휘",
+                    "온화하고 온화하여 타인과의 마찰을 피하고 평화 추구",
+                    "나만의 개성과 섬세한 디테일을 중시"
+                ],
+                project: "감각적인 인터랙션이 돋보이는 우리 학교 모바일 안내 카드",
+                best: "ESFJ - PHP",
+                worst: "ISTJ - C / C++"
+            },
+            "ESTP": {
+                lang: "Dart / Flutter",
+                emoji: "🎯",
+                tag: "스피디한 승부사",
+                title: "거침없는 실행력의 크로스플랫폼 액션맨",
+                quote: "\"고민할 시간에 행동으로 옮기고 즉시 결과를 확인하라!\"",
+                summary: "뛰어난 순간 판단력과 거침없는 실행력으로 판을 이끄는 승부사!",
+                description: "당신은 하나의 코드로 모든 플랫폼을 단숨에 정복하는 Dart/Flutter를 닮았습니다. 지체 없이 즉각적으로 실행하고 체험하며 결과를 증명해냅니다.",
+                traits: [
+                    "체육대회, 체점 경기, 각종 대회에서 액션맨으로 활약",
+                    "순발력이 뛰어나 예측 불가능한 변수에도 빠르게 적응",
+                    "지루한 이론보다는 실전 경험을 통해 습득"
+                ],
+                project: "체육대회 실시간 점수 집계 및 대진표 스마트 앱",
+                best: "ISFJ - Java",
+                worst: "INTP - Haskell"
+            },
+            "ESFP": {
+                lang: "HTML / CSS",
+                emoji: "🎨",
+                tag: "분위기 메이커",
+                title: "화려한 시각적 스포트라이트를 받는 스타",
+                quote: "\"화려한 화면이 나를 감싸네! 보여지는 즐거움이 곧 행복이다.\"",
+                summary: "직관적 매력과 밝은 에너지로 세상을 아름답게 꾸미는 스타!",
+                description: "당신은 눈에 보이는 화려한 레이아웃과 애니메이션을 담당하는 HTML/CSS를 닮았습니다. 즉각적인 피드백과 즐거움으로 사람들의 시선을 사로잡습니다.",
+                traits: [
+                    "학급 분위기를 밝게 만드는 분위기 메이커",
+                    "시각적 효과와 인터랙션을 직관적으로 표현",
+                    "사람들과 함께 어울리는 즐거운 활동에 빠짐없이 참여"
+                ],
+                project: "화려한 효과가 적용된 고교 축제 웹 홍보 사이트",
+                best: "ESTJ - C#",
+                worst: "ENTJ - TypeScript"
+            }
+        };
+
+        const compatibilityData = {
+            "INTJ": { best: "ENFP (Python)", bestReason: "창의적인 아이디어와 엄격한 검증 시스템이 만나 환상적인 시너지를 발휘합니다.", worst: "ENTP (JavaScript)", worstReason: "자유분방한 일 처리 스타일과 엄격한 원칙이 부딪혀 조율이 필요합니다." },
+            "INTP": { best: "ENTJ (TypeScript)", bestReason: "깊은 이론적 아이디어가 체계적인 리더십을 만나 멋진 작품으로 구현됩니다.", worst: "ESFJ (PHP)", worstReason: "추상적인 이론 탐구와 지극히 현실적인 정서 표현의 관점이 다를 수 있습니다." },
+            "ENTJ": { best: "INTP (Haskell)", bestReason: "견고한 통솔력과 깊은 논리가 만나 결점 없는 프로젝트를 완성합니다.", worst: "ESFP (HTML/CSS)", worstReason: "엄격한 관리 스타일과 즉흥적인 시각적 직관이 마찰을 빚을 수 있습니다." },
+            "ENTP": { best: "ISTJ (C / C++)", bestReason: "혁신적인 상상력을 근본 있고 단단한 시스템이 든든하게 받쳐줍니다.", worst: "INTJ (Rust)", worstReason: "자유로운 변수의 시도와 타협 없는 규격 검증이 대립할 수 있습니다." },
+            "INFJ": { best: "ENFJ (Kotlin)", bestReason: "서로의 깊은 철학을 이해하며 따뜻하고 조화로운 방향으로 이끌어줍니다.", worst: "ISTP (SQL)", worstReason: "감성적·상징적 통찰과 당장의 날카로운 현실 직시 방식이 어긋날 수 있습니다." },
+            "INFP": { best: "INTJ (Rust)", bestReason: "자유로운 감성과 창의성에 튼튼하고 안전한 틀을 선물해줍니다.", worst: "ESTJ (C#)", worstReason: "마음의 감성과 규칙 및 조직력 중심의 지휘가 상충할 수 있습니다." },
+            "ENFJ": { best: "INFJ (Go)", bestReason: "서로의 순수한 동기와 열정을 지지하며 최고의 협력 환경을 만듭니다.", worst: "ISTP (SQL)", worstReason: "사람 중심의 조화로운 배려와 단칼에 잘라내는 냉정한 판단이 부딪힙니다." },
+            "ENFP": { best: "INTJ (Rust)", bestReason: "끊임없는 호기심과 아이디어를 완벽한 규칙으로 완성시켜줍니다.", worst: "ISFJ (Java)", worstReason: "새로운 변화 추구와 신중하고 정통적인 절차 준수가 답답할 수 있습니다." },
+            "ISTJ": { best: "ENTP (JavaScript)", bestReason: "단단하고 안정적인 기반 위에 다양하고 재밌는 이펙트가 펼쳐집니다.", worst: "INFP (Ruby)", worstReason: "철저한 사실 준수와 주관적 감성 표현 간의 기준 차이가 존재합니다." },
+            "ISFJ": { best: "ESTP (Flutter)", bestReason: "신중하고 변함없는 수호자 역할이 스피디한 행동파를 안정적으로 돕습니다.", worst: "ENFP (Python)", worstReason: "돌발적인 자유로움이 예측 가능한 수호자의 정돈된 마음을 흔들 수 있습니다." },
+            "ESTJ": { best: "ESFP (HTML/CSS)", bestReason: "체계적인 리더십과 눈에 보이는 직관적 결과물의 조합이 훌륭합니다.", worst: "INFP (Ruby)", worstReason: "결과 중심의 엄격한 지휘가 자유로운 감성파에게 부담이 될 수 있습니다." },
+            "ESFJ": { best: "ISFP (Swift)", bestReason: "따뜻한 봉사와 섬세하고 우아한 표현력이 어우러져 평화롭습니다.", worst: "INTP (Haskell)", worstReason: "당장 눈앞의 사람을 챙기는 마음과 추상적 논리의 거리감이 큽니다." },
+            "ISTP": { best: "ESFJ (PHP)", bestReason: "핵심만 타격하는 날카로운 해결사를 따뜻한 조력자가 챙겨줍니다.", worst: "ENFJ (Kotlin)", worstReason: "필요한 것만 딱 하는 단백함과 세심하게 모두를 다독이는 리더십이 어색할 수 있습니다." },
+            "ISFP": { best: "ESFJ (PHP)", bestReason: "섬세한 감성 디테일을 친근하고 유용한 조력자가 잘 서포트해 줍니다.", worst: "ISTJ (C / C++)", worstReason: "유연하고 미적인 예술가 성향과 깐깐하고 단단한 근본주의가 부딪힙니다." },
+            "ESTP": { best: "ISFJ (Java)", bestReason: "거침없이 돌진하는 실행력 뒤를 든든한 파수꾼이 백업해 줍니다.", worst: "INTP (Haskell)", worstReason: "당장 현장에서 부딪히는 스타일과 조용히 머리로 생각하는 스타일의 갭이 큽니다." },
+            "ESFP": { best: "ESTJ (C#)", bestReason: "눈길을 사로잡는 분위기 메이커를 유능한 관리자가 완성도 높게 이끕니다.", worst: "ENTJ (TypeScript)", worstReason: "자유롭고 즐거운 분위기 추구가 엄격한 통율 체계와 어긋날 수 있습니다." }
+        };
+
+        const questions = [
+            {
+                q: "쉬는 시간이 되었을 때, 보통 나는 무엇을 하면서 시간을 보낼까?",
+                a: { text: "복도나 다른 반으로 놀러 가 친구들과 신나게 수다를 떨며 스트레스를 푼다.", score: { E: 2 } },
+                b: { text: "자리 근처에 있는 친한 친구 한 두 명과 조용히 조근조근 이야기를 나눈다.", score: { E: 1, I: 1 } },
+                c: { text: "이어폰을 끼고 노래를 듣거나 핸드폰을 보며 혼자만의 리프레시 시간을 갖는다.", score: { I: 2 } }
+            },
+            {
+                q: "동아리나 반이 바뀌어 잘 모르는 친구들과 한 모둠이 되었을 때 내 모습은?",
+                a: { text: "내가 먼저 밝게 인사를 건네며 분위기를 띄우고 말을 붙인다.", score: { E: 2 } },
+                b: { text: "누군가 먼저 말을 걸어오면 반갑고 친절하게 대화를 이어간다.", score: { E: 1, I: 1 } },
+                c: { text: "조용히 상황을 관찰하며 필요한 상황이 생길 때까지 기다린다.", score: { I: 2 } }
+            },
+            {
+                q: "수업 시간에 이해가 잘 안 되는 어려운 개념이 나올 때 나는?",
+                a: { text: "손을 들거나 쉬는 시간에 즉시 선생님/친구에게 물어보며 말로 해결한다.", score: { E: 2 } },
+                b: { text: "일단 노트에 표시해 두었다가 쉬는 시간에 친구에게 슬쩍 물어본다.", score: { E: 1, I: 1 } },
+                c: { text: "혼자 자습서나 인터넷 검색을 찾아보며 혼자 이해할 때까지 고민한다.", score: { I: 2 } }
+            },
+            {
+                q: "수행평가나 시험이 전부 끝난 주말, 가장 기운이 나는 힐링 방식은?",
+                a: { text: "친구들과 만나 영화를 보거나 맛집, 핫플을 가며 노는 것", score: { E: 2 } },
+                b: { text: "가장 친한 친구 단 한 명과 한적한 카페에서 수다를 떠는 것", score: { E: 1, I: 1 } },
+                c: { text: "집에서 이불을 뒤집어쓰고 영화, 웹툰, 게임을 혼자 느긋하게 즐기는 것", score: { I: 2 } }
+            },
+            {
+                q: "수행평가 자유 주제 발표에서 주제를 고를 때 끌리는 방향은?",
+                a: { text: "교과서나 뉴스에서 실제로 증명된 명확한 통계나 현실적 사례", score: { S: 2 } },
+                b: { text: "현실적인 사례에 나만의 해석을 약간 덧붙일 수 있는 주제", score: { S: 1, N: 1 } },
+                c: { text: "아무도 시도하지 않은 독창적이고 상상력이 필요한 미래적 주제", score: { N: 2 } }
+            },
+            {
+                q: "수학이나 과학에서 새로운 공식과 원리를 배울 때 나의 이해 방식은?",
+                a: { text: "이 공식이 실제 예제 문제에 어떻게 적용되어 풀리는지 집중한다.", score: { S: 2 } },
+                b: { text: "예제 풀이 방식을 익히면서 원리의 유래도 살짝 살펴본다.", score: { S: 1, N: 1 } },
+                c: { text: "공식이 탄생하게 된 근본 원리와 '만약 조건이 바뀌면?' 하는 상상을 해본다.", score: { N: 2 } }
+            },
+            {
+                q: "친구들과 새로운 장소나 맛집을 찾아갈 때 내 행동 스타일은?",
+                a: { text: "지도 앱의 정확한 건물 이름, 출구 번호, 거리 지표를 확인하며 간다.", score: { S: 2 } },
+                b: { text: "지도 앱의 대략적인 방향을 보면서 근처 큰 건물을표지 삼아 찾아간다.", score: { S: 1, N: 1 } },
+                c: { text: "\"이쪽 느낌인데?\" 직감과 대략적인 공간 감각으로 무작정 걸어본다.", score: { N: 2 } }
+            },
+            {
+                q: "미술이나 기술가정 시간에 뭔가를 직접 조립하고 만들 때 내 모습은?",
+                a: { text: "설명서의 1번부터 차근차근 빠짐없이 읽으며 순서대로 완성한다.", score: { S: 2 } },
+                b: { text: "설명서를 전체적으로 훑어본 뒤 중요한 부분만 참고하며 조립한다.", score: { S: 1, N: 1 } },
+                c: { text: "완성본 그림을 한 번 보고 일단 감대로 조립하다 막힐 때만 설명서를 본다.", score: { N: 2 } }
+            },
+            {
+                q: "시험 점수가 생각보다 안 나와서 우울해하는 친구를 보았을 때 나는?",
+                a: { text: "\"어느 문제에서 틀렸어? 다음엔 오답노트 이렇게 해봐\" 오답 원인을 분석해 준다.", score: { T: 2 } },
+                b: { text: "\"아 진짜 속상하겠다... 오늘 맛있는 거 먹으러 가자!\" 기분을 다독여 준다.", score: { F: 2 } },
+                c: { text: "일단 공감해주면서 기분을 풀어준 뒤, 나중에 공부 팁을 조심스레 알려준다.", score: { T: 1, F: 1 } }
+            },
+            {
+                q: "조별 수행평가 피드백 시간에 팀원들의 결과물을 평가해야 할 때?",
+                a: { text: "완성도를 높이기 위해 틀린 부분이나 부족한 점을 솔직하고 정확하게 지적한다.", score: { T: 2 } },
+                b: { text: "고생한 점을 먼저 칭찬해주고, 기분 상하지 않게 부드럽게 제안한다.", score: { F: 2 } },
+                c: { text: "칭찬을 많이 해주면서 핵심적인 수정사항 한두 개만 살짝 전달한다.", score: { T: 1, F: 1 } }
+            },
+            {
+                q: "친구와 대화 중 의견 대립이 생겼을 때 내가 더 중요하게 보는 것은?",
+                a: { text: "누구의 말이 더 논리적으로 옳고 사리에 맞는지 Fact 기준", score: { T: 2 } },
+                b: { text: "서로 감정이 상하지 않고 관계가 원만하게 유지되는지 Heart 기준", score: { F: 2 } },
+                c: { text: "논리도 중요하지만 친구의 기분을 배려하며 타협점을 찾는 편", score: { T: 1, F: 1 } }
+            },
+            {
+                q: "친한 친구가 \"나 오늘 너무 우울해서 쇼핑했어/영화 봤어\"라고 말할 때 내 첫 마디는?",
+                a: { text: "\"왜? 무슨 일 있었는데? 왜 우울했어?\" (원인 파악)", score: { T: 2 } },
+                b: { text: "\"에구 ㅠㅠ 무슨 일 있었구나.. 뭐 샀어 / 뭐 봤어?\" (감정 공감)", score: { F: 2 } },
+                c: { text: "\"속상했겠다... 좀 기분 전환은 됐어?\" (상태 챙김)", score: { T: 1, F: 1 } }
+            },
+            {
+                q: "시험 D-14일 전, 나의 시험 공부 계획 수립 스타일은?",
+                a: { text: "일자별, 과목별로 공부할 분량을 정밀하게 계획표로 작성한다.", score: { J: 2 } },
+                b: { text: "주차별로 대략적인 목표만 세우고 그날 컨디션에 맞춰 공부한다.", score: { J: 1, P: 1 } },
+                c: { text: "계획표는 따로 안 세우고 시험이 임박했을 때 벼락치기로 몰입한다.", score: { P: 2 } }
+            },
+            {
+                q: "내 학교 책상 위나 공부 폴더 정리 상태는 보통 어떨까?",
+                a: { text: "과목별 프린트물과 파일이 라벨링되어 깔끔하게 정돈되어 있다.", score: { J: 2 } },
+                b: { text: "완벽하진 않지만 대략 필요한 물건이 어디 있는지 찾을 수 있게 되어 있다.", score: { J: 1, P: 1 } },
+                c: { text: "조금 어질러져 보이지만 나만의 감각으로 어디 있는지 다 안다.", score: { P: 2 } }
+            },
+            {
+                q: "친구들과 주말에 만나 놀기로 한 약속 당일, 내 모습은?",
+                a: { text: "몇 시 만남, 몇 시 이동, 어디 방문할지 미리 동선이 확정되어 있다.", score: { J: 2 } },
+                b: { text: "약속 시간과 만날 장소만 정하고 가볼 만한 곳 리스트만 몇 개 뽑아둔다.", score: { J: 1, P: 1 } },
+                c: { text: "만나서 \"오늘 뭐 할까?\" 그때그때 내키는 대로 결정한다.", score: { P: 2 } }
+            },
+            {
+                q: "갑자기 과제 제출 기한이나 수행평가 일정이 바뀐 공지가 올라왔을 때?",
+                a: { text: "일정이 틀어져 짜증이 나며 곧바로 계획표를 새로 수정한다.", score: { J: 2 } },
+                b: { text: "약간 당황스럽지만 바뀐 일정에 맞춰 조절한다.", score: { J: 1, P: 1 } },
+                c: { text: "\"오 오히려 좋아!\" 당황하지 않고 즉흥적으로 대처한다.", score: { P: 2 } }
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+
+        // ESC 키 모달 닫기
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeAllMbtiModal();
+                closeCompatibilityModal();
+            }
+        });
+
+        // URL 파라미터(?mbti=XXXX) 자동 확인 로직
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sharedMbti = urlParams.get('mbti');
+            
+            if (sharedMbti && mbti16Database[sharedMbti.toUpperCase()]) {
+                showResult(sharedMbti.toUpperCase());
+            }
+        });
+
+        function startQuiz() {
+            currentQuestion = 0;
+            userAnswers = [];
+            scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+            
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const qData = questions[currentQuestion];
+            const total = questions.length;
+            const percent = Math.round(((currentQuestion + 1) / total) * 100);
+
+            document.getElementById('question-counter').innerText = `질문 ${currentQuestion + 1} / ${total}`;
+            document.getElementById('progress-percent').innerText = `${percent}%`;
+            
+            const pbContainer = document.getElementById('progress-bar-container');
+            if (pbContainer) {
+                pbContainer.setAttribute('aria-valuenow', percent);
+            }
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+
+            document.getElementById('question-text').innerText = `Q${currentQuestion + 1}. ${qData.q}`;
+            document.getElementById('option-a-text').innerText = qData.a.text;
+            document.getElementById('option-b-text').innerText = qData.b.text;
+            document.getElementById('option-c-text').innerText = qData.c.text;
+
+            ['a', 'b', 'c'].forEach(opt => {
+                const btn = document.getElementById(`option-${opt}-btn`);
+                btn.className = "w-full text-left p-4 rounded-2xl bg-slate-800/80 border border-slate-700/80 hover:border-indigo-500 hover:bg-indigo-950/20 transition-all duration-200 group flex items-start gap-3 focus:outline-none focus:ring-2 focus:ring-indigo-500";
+            });
+
+            if (userAnswers[currentQuestion]) {
+                const prevChoice = userAnswers[currentQuestion].choice.toLowerCase();
+                const selectedBtn = document.getElementById(`option-${prevChoice}-btn`);
+                if (selectedBtn) {
+                    selectedBtn.className = "w-full text-left p-4 rounded-2xl bg-indigo-950/60 border-2 border-indigo-500 ring-2 ring-indigo-500/30 transition-all duration-200 group flex items-start gap-3 shadow-lg shadow-indigo-500/10 focus:outline-none";
+                }
+            }
+
+            const prevBtn = document.getElementById('prev-btn');
+            if (currentQuestion > 0) {
+                prevBtn.classList.remove('invisible');
+            } else {
+                prevBtn.classList.add('invisible');
+            }
+        }
+
+        function selectOption(choice) {
+            const qData = questions[currentQuestion];
+            let choiceKey = choice.toLowerCase();
+            let selectedScore = qData[choiceKey].score;
+
+            userAnswers[currentQuestion] = { choice: choice, score: selectedScore };
+
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                finishTest();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        function finishTest() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('loading-screen').classList.remove('hidden');
+
+            scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+            userAnswers.forEach(ans => {
+                if (ans && ans.score) {
+                    for (let key in ans.score) {
+                        scores[key] += ans.score[key];
+                    }
+                }
+            });
+
+            setTimeout(() => {
+                document.getElementById('loading-screen').classList.add('hidden');
+                showResult();
+            }, 1000);
+        }
+
+        function calculateResultMBTI() {
+            const eOrI = scores.E >= scores.I ? 'E' : 'I';
+            const sOrN = scores.S >= scores.N ? 'S' : 'N';
+            const tOrF = scores.T >= scores.F ? 'T' : 'F';
+            const jOrP = scores.J >= scores.P ? 'J' : 'P';
+            return `${eOrI}${sOrN}${tOrF}${jOrP}`;
+        }
+
+        function showResult(targetMbti = null) {
+            const mbti = targetMbti || calculateResultMBTI();
+            const resultData = mbti16Database[mbti] || mbti16Database["ENFP"];
+
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('loading-screen').classList.add('hidden');
+            document.getElementById('all-mbti-modal').classList.add('hidden');
+            document.getElementById('compatibility-modal').classList.add('hidden');
+
+            document.getElementById('result-screen').classList.remove('hidden');
+
+            renderResultContent(resultData, mbti);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderResultContent(data, mbti) {
+            document.getElementById('result-mbti-badge').innerText = `내 성향 MBTI: ${mbti} (${data.tag || ''})`;
+            document.getElementById('result-lang-title').innerText = `${data.emoji} ${data.lang}`;
+            document.getElementById('result-sub-quote').innerText = data.quote;
+            document.getElementById('result-summary-text').innerText = data.summary;
+            document.getElementById('result-desc-text').innerText = data.description;
+
+            // QR 코드 자동 생성 (학교 부스 PC ➔ 스마트폰 전달용)
+            const shareUrl = `${window.location.origin}${window.location.pathname}?mbti=${mbti}`;
+            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(shareUrl)}`;
+            const qrImg = document.getElementById('result-qr-code');
+            if (qrImg) {
+                qrImg.src = qrApiUrl;
+            }
+
+            const totalEI = (scores.E + scores.I) || 1;
+            const ePct = Math.round((scores.E / totalEI) * 100);
+            const iPct = 100 - ePct;
+
+            const totalSN = (scores.S + scores.N) || 1;
+            const sPct = Math.round((scores.S / totalSN) * 100);
+            const nPct = 100 - sPct;
+
+            const totalTF = (scores.T + scores.F) || 1;
+            const tPct = Math.round((scores.T / totalTF) * 100);
+            const fPct = 100 - tPct;
+
+            const totalJP = (scores.J + scores.P) || 1;
+            const jPct = Math.round((scores.J / totalJP) * 100);
+            const pPct = 100 - jPct;
+
+            document.getElementById('trait-e-pct').innerText = `${ePct}%`;
+            document.getElementById('trait-i-pct').innerText = `${iPct}%`;
+            document.getElementById('trait-ei-bar').style.width = `${ePct}%`;
+
+            document.getElementById('trait-s-pct').innerText = `${sPct}%`;
+            document.getElementById('trait-n-pct').innerText = `${nPct}%`;
+            document.getElementById('trait-sn-bar').style.width = `${sPct}%`;
+
+            document.getElementById('trait-t-pct').innerText = `${tPct}%`;
+            document.getElementById('trait-f-pct').innerText = `${fPct}%`;
+            document.getElementById('trait-tf-bar').style.width = `${tPct}%`;
+
+            document.getElementById('trait-j-pct').innerText = `${jPct}%`;
+            document.getElementById('trait-p-pct').innerText = `${pPct}%`;
+            document.getElementById('trait-jp-bar').style.width = `${jPct}%`;
+
+            const traitsContainer = document.getElementById('result-traits');
+            traitsContainer.innerHTML = '';
+            data.traits.forEach(trait => {
+                const li = document.createElement('li');
+                li.className = "flex items-start gap-2 text-slate-200";
+                li.innerHTML = `<i class="fa-solid fa-check text-indigo-400 mt-1 text-xs" aria-hidden="true"></i><span>${trait}</span>`;
+                traitsContainer.appendChild(li);
+            });
+
+            document.getElementById('result-project').innerText = data.project;
+            document.getElementById('result-match-best').innerText = data.best;
+            document.getElementById('result-match-worst').innerText = data.worst;
+        }
+
+        function openAllMbtiModal() {
+            renderLanguageMap();
+            document.getElementById('all-mbti-modal').classList.remove('hidden');
+        }
+
+        function closeAllMbtiModal() {
+            document.getElementById('all-mbti-modal').classList.add('hidden');
+        }
+
+        function renderLanguageMap() {
+            const grid = document.getElementById('map-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            Object.keys(mbti16Database).forEach((mbti) => {
+                const item = mbti16Database[mbti];
+                const card = document.createElement('div');
+                card.className = "group cursor-pointer p-4 rounded-xl border border-slate-700/80 bg-slate-800/90 shadow-sm hover:shadow-md hover:border-indigo-500 transition-all duration-200 transform hover:-translate-y-1 flex flex-col justify-between focus:outline-none focus:ring-2 focus:ring-indigo-500";
+                card.tabIndex = 0;
+                
+                card.onclick = () => { showResult(mbti); };
+                card.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') showResult(mbti); };
+
+                const traitsHtml = item.traits.map(t => `<li class="text-[11px] text-slate-300">• ${t}</li>`).join('');
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2.5 py-1 text-xs font-bold rounded-md bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                                ${mbti}
+                            </span>
+                            <span class="text-2xl transition-transform group-hover:scale-110" role="img" aria-label="${item.lang} 아이콘">${item.emoji}</span>
+                        </div>
+                        <h4 class="font-bold text-white text-base mb-1 group-hover:text-indigo-400 transition-colors">
+                            ${item.lang}
+                        </h4>
+                        <p class="text-xs text-indigo-300 font-semibold mb-2">${item.title}</p>
+                        <p class="text-xs text-slate-400 line-clamp-2 mb-3">
+                            ${item.summary}
+                        </p>
+                        <div class="bg-slate-900/60 rounded-lg p-2 mb-3 border border-slate-800">
+                            <strong class="text-xs text-indigo-300 font-semibold block mb-1"><i class="fa-solid fa-star text-[10px]" aria-hidden="true"></i> 주요 특징:</strong>
+                            <ul class="space-y-0.5">
+                                ${traitsHtml}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="text-xs font-semibold text-indigo-400 flex items-center justify-end gap-1 pt-2 border-t border-slate-700/50">
+                        <span>결과 바로보기</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] transition-transform group-hover:translate-x-1" aria-hidden="true"></i>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openCompatibilityModal() {
+            populateCompatSelects();
+            renderCompatibilityGrid();
+            updateMatchResult();
+            document.getElementById('compatibility-modal').classList.remove('hidden');
+        }
+
+        function closeCompatibilityModal() {
+            document.getElementById('compatibility-modal').classList.add('hidden');
+        }
+
+        function populateCompatSelects() {
+            const sel1 = document.getElementById('compat-lang-1');
+            const sel2 = document.getElementById('compat-lang-2');
+            if (sel1.options.length > 0) return;
+
+            for (let type in mbti16Database) {
+                const item = mbti16Database[type];
+                const optText = `${type} - ${item.lang}`;
+                sel1.add(new Option(optText, type));
+                sel2.add(new Option(optText, type));
+            }
+            sel1.value = "INFP";
+            sel2.value = "INTJ";
+        }
+
+        function updateMatchResult() {
+            const t1 = document.getElementById('compat-lang-1').value;
+            const t2 = document.getElementById('compat-lang-2').value;
+
+            const badge = document.getElementById('compat-score-badge');
+            const title = document.getElementById('compat-title');
+            const desc = document.getElementById('compat-desc');
+            const tip = document.getElementById('compat-tip');
+
+            if (t1 === t2) {
+                badge.innerText = "궁합 점수: 88점 (쌍둥이 케미)";
+                badge.className = "px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 font-extrabold text-xs sm:text-sm border border-indigo-500/40";
+                title.innerText = "👯‍♂️ 통하는 게 많은 영혼의 데칼코마니!";
+                desc.innerText = `${mbti16Database[t1].lang}끼리의 만남! 서로 말하지 않아도 생각하는 방식과 작업 스타일이 거의 똑같습니다.`;
+                tip.innerText = "서로의 장점이 배가되지만, 둘 다 놓치는 맹점이 생길 수 있으니 주의하세요!";
+                return;
+            }
+
+            const info1 = compatibilityData[t1];
+            if (info1 && info1.best.startsWith(t2)) {
+                badge.innerText = "궁합 점수: 98점 (최상위 케미)";
+                badge.className = "px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-xs sm:text-sm border border-emerald-500/40";
+                title.innerText = "💖 서로를 상호 보완하는 최고의 찰떡 콤비!";
+                desc.innerText = info1.bestReason;
+                tip.innerText = "한 명의 확실한 강점이 다른 한 명의 약점을 깔끔하게 커버해 수행평가 만점을 끌어내는 우주급 조합입니다!";
+                return;
+            } 
+
+            if (info1 && info1.worst.startsWith(t2)) {
+                badge.innerText = "궁합 점수: 52점 (티격태격 케미)";
+                badge.className = "px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 font-extrabold text-xs sm:text-sm border border-rose-500/40";
+                title.innerText = "⚡ 일하는 방식이 달라 부딪히는 단짝 라이벌!";
+                desc.innerText = info1.worstReason;
+                tip.innerText = "의견 충돌이 생기면 감정 표현보다는 역할 구분을 사전에 칼같이 나누고 시작하는 것이 꿀팁입니다.";
+                return;
+            }
+
+            let score = 70;
+            if (t1[1] === t2[1]) score += 10;
+            if (t1[0] !== t2[0]) score += 5;
+            if (t1[2] === t2[2]) score += 4;
+            if (t1[3] !== t2[3]) score += 3;
+
+            const charSum = t1.charCodeAt(0) + t1.charCodeAt(1) + t2.charCodeAt(2) + t2.charCodeAt(3);
+            const offset = (charSum % 9) - 4;
+            score = Math.min(94, Math.max(61, score + offset));
+
+            if (score >= 88) {
+                badge.innerText = `궁합 점수: ${score}점 (대단한 시너지)`;
+                badge.className = "px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-xs sm:text-sm border border-emerald-500/40";
+                title.innerText = "🌟 호흡이 착착 맞아서 일처리가 빨라지는 조합!";
+                desc.innerText = `${mbti16Database[t1].lang}과(와) ${mbti16Database[t2].lang}은 사고방식의 교집합이 커서 쉽게 뜻을 모을 수 있습니다.`;
+                tip.innerText = "아이디어가 끊임없이 이어지는 조합입니다. 역할을 정하고 바로 실행해보세요!";
+            } else if (score >= 78) {
+                badge.innerText = `궁합 점수: ${score}점 (안정적인 조화)`;
+                badge.className = "px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 font-extrabold text-xs sm:text-sm border border-indigo-500/40";
+                title.innerText = "🤝 서로 다른 매력으로 협력하는 든든한 동료!";
+                desc.innerText = `각자의 개성이 잘 보존되면서도 모둠 과제나 소통에서 부담 없이 어우러지는 무난하고 평화로운 관계입니다.`;
+                tip.innerText = "서로의 다름을 존중하면서 잘하는 부분을 나누어 담당해 보세요.";
+            } else if (score >= 68) {
+                badge.innerText = `궁합 점수: ${score}점 (흥미로운 케미)`;
+                badge.className = "px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-extrabold text-xs sm:text-sm border border-amber-500/40";
+                title.innerText = "🔍 시각의 차이에서 신선한 아이디어가 피어나는 관점 차이!";
+                desc.innerText = `생각하는 접근 방식이 서로 달라 초기 대화엔 조율이 필요하지만, 그만큼 고정관념을 깨는 결과를 만듭니다.`;
+                tip.innerText = "서로의 의견에 귀 기울여주면 뜻밖의 명작이 완성됩니다.";
+            } else {
+                badge.innerText = `궁합 점수: ${score}점 (밀당형 조율 필요)`;
+                badge.className = "px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 font-extrabold text-xs sm:text-sm border border-purple-500/40";
+                title.innerText = "🧩 가이드라인과 규칙이 필요한 조합!";
+                desc.innerText = `일 처리 속도나 우선순위가 달라서 초반에 살짝 삐걱거릴 수 있지만 규칙만 정해두면 보완재가 됩니다.`;
+                tip.innerText = "제출 기한과 각자 담당할 역할을 문서로 명확히 써두고 시작하세요!";
+            }
+        }
+
+        function renderCompatibilityGrid() {
+            const grid = document.getElementById('compatibility-grid');
+            if (grid.children.length > 0) return;
+
+            for (let type in compatibilityData) {
+                const comp = compatibilityData[type];
+                const langInfo = mbti16Database[type];
+
+                const card = document.createElement('div');
+                card.className = "bg-slate-800/80 rounded-2xl p-4 border border-slate-700/80 flex flex-col justify-between";
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 font-bold text-xs border border-indigo-500/30">${type}</span>
+                            <span class="text-xs text-white font-bold">${langInfo.lang}</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2 mt-2">
+                        <div class="bg-emerald-950/40 rounded-xl p-2.5 border border-emerald-800/40 text-xs">
+                            <strong class="text-emerald-400 font-semibold block mb-0.5"><i class="fa-solid fa-heart mr-1" aria-hidden="true"></i> 찰떡 궁합: ${comp.best}</strong>
+                            <p class="text-slate-300 text-[11px] leading-tight">${comp.bestReason}</p>
+                        </div>
+                        <div class="bg-rose-950/40 rounded-xl p-2.5 border border-rose-800/40 text-xs">
+                            <strong class="text-rose-400 font-semibold block mb-0.5"><i class="fa-solid fa-bolt mr-1" aria-hidden="true"></i> 주의 궁합: ${comp.worst}</strong>
+                            <p class="text-slate-300 text-[11px] leading-tight">${comp.worstReason}</p>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            }
+        }
+
+        async function shareResult() {
+            const title = document.getElementById('result-lang-title').innerText;
+            const quote = document.getElementById('result-sub-quote').innerText;
+            const mbtiBadge = document.getElementById('result-mbti-badge').innerText;
+            
+            const mbtiMatch = mbtiBadge.match(/[A-Z]{4}/);
+            const mbti = mbtiMatch ? mbtiMatch[0] : 'ENFP';
+            
+            const shareUrl = `${window.location.origin}${window.location.pathname}?mbti=${mbti}`;
+            const shareText = `[고등학생 프로그래밍 언어 MBTI 테스트 결과]\n\n나의 추천 언어: ${title} (${mbtiBadge})\n${quote}\n\n내 결과 바로보기 및 테스트 시작하기:\n${shareUrl}`;
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: '고등학생 프로그래밍 언어 MBTI 테스트',
+                        text: shareText
+                    });
+                    return;
+                } catch (err) {
+                    if (err.name === 'AbortError') return;
+                }
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                try {
+                    await navigator.clipboard.writeText(shareText);
+                    showToast("결과 내용과 링크가 클립보드에 복사되었습니다!");
+                } catch (err) {
+                    fallbackCopy(shareText);
+                }
+            } else {
+                fallbackCopy(shareText);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast("결과 내용과 링크가 클립보드에 복사되었습니다!");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 2500);
+        }
+
+        function restartTest() {
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('start-screen').classList.remove('hidden');
+        }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <header class="w-full max-w-2xl mx-auto px-4 py-6 flex items-center justify-between border-b border-slate-800/80">
+        <div class="flex items-center gap-2.5 cursor-pointer focus:outline-none" onclick="restartTest()" tabindex="0" role="button" aria-label="메인 화면으로 이동">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-white font-black text-lg shadow-lg shadow-indigo-500/30">
+                <i class="fa-solid fa-code" aria-hidden="true"></i>
+            </div>
+            <div>
+                <h1 class="font-extrabold text-base tracking-tight text-white">개발자 MBTI</h1>
+                <p class="text-[11px] text-indigo-400 font-medium">고등학생 맞춤형 테스트</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <button onclick="openAllMbtiModal()" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold transition-all border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <i class="fa-solid fa-map text-indigo-400 mr-1" aria-hidden="true"></i> 언어 지도
+            </button>
+            <button onclick="openCompatibilityModal()" class="text-xs px-3 py-1.5 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 font-semibold transition-all border border-indigo-500/30 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <i class="fa-solid fa-heart-pulse text-indigo-400 mr-1" aria-hidden="true"></i> 궁합표
+            </button>
+        </div>
+    </header>
+
+    <main class="w-full max-w-2xl mx-auto px-4 py-8 flex-1 flex flex-col justify-center">
+        <!-- 시작 화면 -->
+        <div id="start-screen" class="bg-slate-900/80 rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-2xl backdrop-blur-xl text-center space-y-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-bold">
+                <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> 16가지 고등학교 일상 시나리오
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
+                나와 닮은 <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">프로그래밍 언어</span>는?
+            </h2>
+            <p class="text-slate-400 text-sm leading-relaxed max-w-md mx-auto">
+                복잡하고 어려운 코딩 용어는 그만! 쉬는 시간, 수행평가, 친구 대화 등 학교 일상 선택지(A/B/C)로 나와 딱 맞는 언어를 찾아보세요.
+            </p>
+
+            <div class="grid grid-cols-3 gap-3 pt-2 pb-4">
+                <div class="p-3 rounded-2xl bg-slate-800/50 border border-slate-800">
+                    <span class="text-2xl block mb-1" role="img" aria-label="파이썬">🐍</span>
+                    <span class="text-xs font-bold text-slate-300 block">Python</span>
+                    <span class="text-[10px] text-slate-500">열정의 아이콘</span>
+                </div>
+                <div class="p-3 rounded-2xl bg-slate-800/50 border border-slate-800">
+                    <span class="text-2xl block mb-1" role="img" aria-label="러스트">🦀</span>
+                    <span class="text-xs font-bold text-slate-300 block">Rust</span>
+                    <span class="text-[10px] text-slate-500">완벽한 안전성</span>
+                </div>
+                <div class="p-3 rounded-2xl bg-slate-800/50 border border-slate-800">
+                    <span class="text-2xl block mb-1" role="img" aria-label="자바스크립트">⚡</span>
+                    <span class="text-xs font-bold text-slate-300 block">JavaScript</span>
+                    <span class="text-[10px] text-slate-500">자유로운 혁신</span>
+                </div>
+            </div>
+
+            <div class="space-y-3 pt-2">
+                <button onclick="startQuiz()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-extrabold text-base shadow-lg shadow-indigo-500/25 hover:from-indigo-600 hover:to-purple-700 transition-all transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                    테스트 시작하기 <i class="fa-solid fa-arrow-right ml-2" aria-hidden="true"></i>
+                </button>
+                <div class="flex gap-2">
+                    <button onclick="openAllMbtiModal()" class="w-1/2 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition-colors border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <i class="fa-solid fa-border-all mr-1 text-indigo-400" aria-hidden="true"></i> 16가지 언어 지도
+                    </button>
+                    <button onclick="openCompatibilityModal()" class="w-1/2 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-indigo-300 font-bold text-xs transition-colors border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <i class="fa-solid fa-heart mr-1 text-pink-400" aria-hidden="true"></i> 언어별 궁합 보기
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 퀴즈 화면 -->
+        <div id="quiz-screen" class="hidden bg-slate-900/80 rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-2xl backdrop-blur-xl space-y-6">
+            <!-- Progress Bar -->
+            <div class="space-y-2">
+                <div class="flex justify-between items-center text-xs font-bold">
+                    <span id="question-counter" class="text-indigo-400">질문 1 / 16</span>
+                    <span id="progress-percent" class="text-slate-400">6%</span>
+                </div>
+                <div id="progress-bar-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="6" aria-label="테스트 진행 상황" class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-300 rounded-full" style="width: 6%"></div>
+                </div>
+            </div>
+
+            <!-- Question Text -->
+            <div class="py-2">
+                <h3 id="question-text" class="text-lg sm:text-xl font-bold text-white leading-snug min-h-[3rem]">
+                    Q1. 질문 내용이 들어갑니다.
+                </h3>
+            </div>
+
+            <!-- 3지선다 버튼 (A, B, C) -->
+            <div class="space-y-3">
+                <button id="option-a-btn" onclick="selectOption('A')" class="w-full text-left p-4 rounded-2xl bg-slate-800/80 border border-slate-700/80 hover:border-indigo-500 hover:bg-indigo-950/20 transition-all duration-200 group flex items-start gap-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <span class="w-7 h-7 rounded-xl bg-indigo-500/20 text-indigo-300 font-black text-xs flex items-center justify-center shrink-0 border border-indigo-500/30 group-hover:bg-indigo-600 group-hover:text-white transition-colors">A</span>
+                    <span id="option-a-text" class="text-sm font-medium text-slate-200 group-hover:text-white pt-0.5">A 선택지 내용</span>
+                </button>
+                <button id="option-b-btn" onclick="selectOption('B')" class="w-full text-left p-4 rounded-2xl bg-slate-800/80 border border-slate-700/80 hover:border-indigo-500 hover:bg-indigo-950/20 transition-all duration-200 group flex items-start gap-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <span class="w-7 h-7 rounded-xl bg-purple-500/20 text-purple-300 font-black text-xs flex items-center justify-center shrink-0 border border-purple-500/30 group-hover:bg-purple-600 group-hover:text-white transition-colors">B</span>
+                    <span id="option-b-text" class="text-sm font-medium text-slate-200 group-hover:text-white pt-0.5">B 선택지 내용</span>
+                </button>
+                <button id="option-c-btn" onclick="selectOption('C')" class="w-full text-left p-4 rounded-2xl bg-slate-800/80 border border-slate-700/80 hover:border-indigo-500 hover:bg-indigo-950/20 transition-all duration-200 group flex items-start gap-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <span class="w-7 h-7 rounded-xl bg-pink-500/20 text-pink-300 font-black text-xs flex items-center justify-center shrink-0 border border-pink-500/30 group-hover:bg-pink-600 group-hover:text-white transition-colors">C</span>
+                    <span id="option-c-text" class="text-sm font-medium text-slate-200 group-hover:text-white pt-0.5">C 선택지 내용</span>
+                </button>
+            </div>
+
+            <!-- Navigation Bar -->
+            <div class="flex justify-between items-center pt-2">
+                <button id="prev-btn" onclick="prevQuestion()" class="invisible px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <i class="fa-solid fa-chevron-left mr-1" aria-hidden="true"></i> 이전 질문
+                </button>
+                <span class="text-[11px] text-slate-500">솔직한 답변이 가장 정확합니다</span>
+            </div>
+        </div>
+
+        <!-- 로딩 화면 -->
+        <div id="loading-screen" class="hidden bg-slate-900/80 rounded-3xl p-10 border border-slate-800 shadow-2xl backdrop-blur-xl text-center space-y-6" aria-live="polite">
+            <div class="relative w-20 h-20 mx-auto">
+                <div class="absolute inset-0 rounded-full border-4 border-indigo-500/20"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-indigo-500 border-t-transparent animate-spin"></div>
+                <div class="absolute inset-0 flex items-center justify-center text-indigo-400 text-xl font-bold">
+                    <i class="fa-solid fa-code" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-xl font-bold text-white">성향을 분석하고 있습니다...</h3>
+                <p class="text-xs text-slate-400">당신의 학교 생활 답변 패턴으로 딱 맞는 프로그래밍 언어를 산출 중입니다.</p>
+            </div>
+        </div>
+
+        <!-- 결과 화면 -->
+        <div id="result-screen" class="hidden bg-slate-900/80 rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-2xl backdrop-blur-xl space-y-8">
+            <!-- Header Result Badge -->
+            <div class="text-center space-y-3">
+                <span id="result-mbti-badge" class="inline-block px-4 py-1.5 rounded-full bg-indigo-500/20 text-indigo-300 font-extrabold text-xs tracking-wider border border-indigo-500/40">
+                    내 성향 MBTI: ENFP
+                </span>
+                <h2 id="result-lang-title" class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                    🐍 Python
+                </h2>
+                <p id="result-sub-quote" class="text-xs sm:text-sm text-indigo-300 italic font-medium">
+                    "인생은 짧습니다. 고민하지 말고 지금 당장 시작해 보세요!"
+                </p>
+            </div>
+
+            <!-- Summary Box -->
+            <div class="bg-indigo-950/30 rounded-2xl p-4 border border-indigo-800/40 space-y-2">
+                <h4 class="text-xs font-bold text-indigo-400 uppercase tracking-wider">한 줄 요약</h4>
+                <p id="result-summary-text" class="text-sm font-semibold text-slate-200 leading-relaxed">
+                    친근한 접근성과 무궁무진한 호기심으로 아이디어를 펼치는 열정파!
+                </p>
+            </div>
+
+            <!-- 세부 성향 비율 Section -->
+            <div class="bg-slate-800/40 rounded-2xl p-5 border border-slate-800 space-y-4">
+                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-chart-simple text-indigo-400" aria-hidden="true"></i> 내 세부 성향 비율
+                </h4>
+                <div class="space-y-3.5 text-xs">
+                    <!-- E vs I -->
+                    <div>
+                        <div class="flex justify-between font-bold mb-1">
+                            <span class="text-indigo-300">외향형 (E) <span id="trait-e-pct">0%</span></span>
+                            <span class="text-purple-300"><span id="trait-i-pct">0%</span> 내향형 (I)</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden flex">
+                            <div id="trait-ei-bar" class="h-full bg-gradient-to-r from-indigo-500 to-indigo-400 rounded-full transition-all duration-500" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    <!-- S vs N -->
+                    <div>
+                        <div class="flex justify-between font-bold mb-1">
+                            <span class="text-indigo-300">감각형 (S) <span id="trait-s-pct">0%</span></span>
+                            <span class="text-purple-300"><span id="trait-n-pct">0%</span> 직관형 (N)</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden flex">
+                            <div id="trait-sn-bar" class="h-full bg-gradient-to-r from-indigo-500 to-indigo-400 rounded-full transition-all duration-500" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    <!-- T vs F -->
+                    <div>
+                        <div class="flex justify-between font-bold mb-1">
+                            <span class="text-indigo-300">사고형 (T) <span id="trait-t-pct">0%</span></span>
+                            <span class="text-purple-300"><span id="trait-f-pct">0%</span> 감정형 (F)</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden flex">
+                            <div id="trait-tf-bar" class="h-full bg-gradient-to-r from-indigo-500 to-indigo-400 rounded-full transition-all duration-500" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    <!-- J vs P -->
+                    <div>
+                        <div class="flex justify-between font-bold mb-1">
+                            <span class="text-indigo-300">판단형 (J) <span id="trait-j-pct">0%</span></span>
+                            <span class="text-purple-300"><span id="trait-p-pct">0%</span> 인식형 (P)</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden flex">
+                            <div id="trait-jp-bar" class="h-full bg-gradient-to-r from-indigo-500 to-indigo-400 rounded-full transition-all duration-500" style="width: 50%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">상세 성향 분석</h4>
+                <p id="result-desc-text" class="text-sm text-slate-300 leading-relaxed">
+                    당신은 누구나 배우기 쉽고 다양한 분야에서 활약하는 언어와 닮았습니다.
+                </p>
+            </div>
+
+            <!-- Major Traits List -->
+            <div class="space-y-3">
+                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-star text-indigo-400 mr-1" aria-hidden="true"></i> 고교 생활 주요 특징</h4>
+                <ul id="result-traits" class="space-y-2 text-xs sm:text-sm bg-slate-800/50 rounded-2xl p-4 border border-slate-800">
+                    <!-- Dynamic LI -->
+                </ul>
+            </div>
+
+            <!-- Recommended Project -->
+            <div class="bg-slate-800/40 rounded-2xl p-4 border border-slate-800 space-y-1">
+                <span class="text-[11px] font-bold text-indigo-400 block uppercase"><i class="fa-solid fa-lightbulb mr-1" aria-hidden="true"></i> 추천 어울리는 탐구 프로젝트</span>
+                <p id="result-project" class="text-xs sm:text-sm font-bold text-slate-200">
+                    AI 기반 내 성격 맞춤 학교 급식 & 맛집 추천기
+                </p>
+            </div>
+
+            <!-- Best / Worst Matches -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-emerald-950/30 rounded-2xl p-4 border border-emerald-800/40 space-y-1">
+                    <span class="text-xs font-bold text-emerald-400 block"><i class="fa-solid fa-heart mr-1" aria-hidden="true"></i> 환상의 찰떡 궁합</span>
+                    <h5 id="result-match-best" class="text-sm font-extrabold text-white">INTJ - Rust</h5>
+                </div>
+                <div class="bg-rose-950/30 rounded-2xl p-4 border border-rose-800/40 space-y-1">
+                    <span class="text-xs font-bold text-rose-400 block"><i class="fa-solid fa-bolt mr-1" aria-hidden="true"></i> 우당탕탕 주의 궁합</span>
+                    <h5 id="result-match-worst" class="text-sm font-extrabold text-white">ISFJ - Java</h5>
+                </div>
+            </div>
+
+            <!-- PC -> Smartphone QR Code Box (축제 부스 전용) -->
+            <div class="bg-slate-800/60 rounded-2xl p-4 border border-slate-700 text-center space-y-2">
+                <span class="text-xs font-bold text-indigo-300 block">
+                    <i class="fa-solid fa-qrcode mr-1" aria-hidden="true"></i> 스마트폰으로 내 결과 가져가기
+                </span>
+                <div class="flex justify-center py-1">
+                    <img id="result-qr-code" src="" alt="결과 페이지 QR 코드" class="w-32 h-32 rounded-xl border-2 border-indigo-500/50 bg-white p-1.5 shadow-md">
+                </div>
+                <p class="text-[11px] text-slate-400">
+                    카메라 앱으로 QR 코드를 스캔하면 내 폰에서 결과를 확인하고 친구에게 공유할 수 있습니다!
+                </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-3 pt-2">
+                <div class="flex gap-2">
+                    <button onclick="shareResult()" class="w-1/2 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs transition-colors shadow-lg shadow-indigo-600/20 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                        <i class="fa-solid fa-share-nodes mr-1" aria-hidden="true"></i> 결과 공유 / 복사하기
+                    </button>
+                    <button onclick="restartTest()" class="w-1/2 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition-colors border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <i class="fa-solid fa-rotate-right mr-1" aria-hidden="true"></i> 다시 테스트하기
+                    </button>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="openAllMbtiModal()" class="w-1/2 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-indigo-300 font-semibold text-xs border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        전체 MBTI 지도 보기
+                    </button>
+                    <button onclick="openCompatibilityModal()" class="w-1/2 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-pink-300 font-semibold text-xs border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        궁합표 모달 열기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 전체 MBTI 모달 -->
+    <div id="all-mbti-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="all-mbti-title">
+        <div class="bg-slate-900 rounded-3xl border border-slate-800 w-full max-w-4xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/90 sticky top-0 z-10">
+                <div>
+                    <h3 id="all-mbti-title" class="text-lg font-bold text-white"><i class="fa-solid fa-map text-indigo-400 mr-2" aria-hidden="true"></i>16가지 MBTI 언어 전체 지도</h3>
+                    <p class="text-xs text-slate-400">카드를 클릭하면 해당 MBTI의 결과 화면으로 바로 이동합니다.</p>
+                </div>
+                <button onclick="closeAllMbtiModal()" aria-label="모달 닫기" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <i class="fa-solid fa-xmark text-sm" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="p-5 overflow-y-auto flex-1">
+                <div id="map-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Dynamic Grid Cards -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 언어 궁합 모달 -->
+    <div id="compatibility-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="compat-modal-title">
+        <div class="bg-slate-900 rounded-3xl border border-slate-800 w-full max-w-3xl max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/90 sticky top-0 z-10">
+                <div>
+                    <h3 id="compat-modal-title" class="text-lg font-bold text-white"><i class="fa-solid fa-heart-pulse text-pink-400 mr-2" aria-hidden="true"></i>언어별 궁합 지도 & 1대1 계산기</h3>
+                    <p class="text-xs text-slate-400">나와 친구의 MBTI 선택 후 궁합 점수를 바로 확인해 보세요.</p>
+                </div>
+                <button onclick="closeCompatibilityModal()" aria-label="모달 닫기" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <i class="fa-solid fa-xmark text-sm" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="p-5 overflow-y-auto space-y-6 flex-1">
+                <!-- 1:1 Calculator Box -->
+                <div class="bg-slate-800/60 rounded-2xl p-5 border border-slate-700 space-y-4">
+                    <h4 class="text-xs font-extrabold text-indigo-400 uppercase tracking-wider"><i class="fa-solid fa-calculator mr-1" aria-hidden="true"></i> 1대1 궁합 검색기</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label for="compat-lang-1" class="block text-xs font-semibold text-slate-400 mb-1">내 언어 (MBTI)</label>
+                            <select id="compat-lang-1" onchange="updateMatchResult()" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
+                                <!-- Dynamic Options -->
+                            </select>
+                        </div>
+                        <div>
+                            <label for="compat-lang-2" class="block text-xs font-semibold text-slate-400 mb-1">친구 언어 (MBTI)</label>
+                            <select id="compat-lang-2" onchange="updateMatchResult()" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
+                                <!-- Dynamic Options -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Calculated Result -->
+                    <div class="bg-slate-900/80 rounded-xl p-4 border border-slate-800 text-center space-y-2">
+                        <span id="compat-score-badge" class="inline-block px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 font-extrabold text-xs border border-indigo-500/40">
+                            궁합 점수: 98점
+                        </span>
+                        <h5 id="compat-title" class="text-sm font-bold text-white">최고의 찰떡 콤비!</h5>
+                        <p id="compat-desc" class="text-xs text-slate-300 leading-relaxed">서로를 상호 보완해주는 궁합입니다.</p>
+                        <p id="compat-tip" class="text-[11px] text-indigo-400 font-medium pt-1 border-t border-slate-800">꿀팁 문구</p>
+                    </div>
+                </div>
+
+                <!-- Whole 16 Grid -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-extrabold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-list mr-1" aria-hidden="true"></i> 전체 16가지 언어별 궁합 요약</h4>
+                    <div id="compatibility-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <!-- Dynamic Compatibility Cards -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Component -->
+    <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-indigo-600 text-white px-4 py-2.5 rounded-full shadow-lg text-xs font-bold transition-opacity duration-300 opacity-0 pointer-events-none flex items-center gap-2">
+        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+        <span id="toast-msg">복사되었습니다!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-2xl mx-auto px-4 py-6 text-center text-xs text-slate-600 border-t border-slate-900">
+        <p>고등학생 맞춤형 프로그래밍 언어 MBTI 테스트 &copy; 2026</p>
+    </footer>
+
+</body>
+</html>
